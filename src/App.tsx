@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Child } from "./child";
 
 function App() {
+  let handleClick = () => { };
+  const [ trigger, setTrigger ] = useState(false);
+
+  const hitTrigger = (): void => {
+    setTrigger(!trigger);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Child
+        toggle={ (toggle: () => void) => {
+          handleClick = toggle;
+        } }
+        trigger={ trigger }
+      />
+      <button onClick={ () => handleClick() }>Toggle Hello World</button>
+      <button onClick={ () => hitTrigger() }>Toggle Hello Universe</button>
     </div>
   );
 }
